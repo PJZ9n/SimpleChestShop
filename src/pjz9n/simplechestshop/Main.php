@@ -27,5 +27,12 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase
 {
-    //
+    public function onLoad(): void
+    {
+        //check the composer vendor bundled version
+        if (file_exists($this->getFile() . "vendor/")) {
+            $this->getLogger()->debug("The composer vendor bundled version was detected.");
+            require_once __DIR__ . "/../../../vendor/autoload.php";
+        }
+    }
 }
