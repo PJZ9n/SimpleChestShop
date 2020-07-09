@@ -32,11 +32,11 @@ class Main extends PluginBase
     public function onLoad(): void
     {
         $this->loadLibrary(
-            __DIR__ . "/../../../composer/illuminate/database/vendor/autoload.php",
+            __DIR__ . "/../../../resources/composer/illuminate/database/vendor/autoload.php",
             Manager::class
         );
         $this->loadLibrary(
-            __DIR__ . "/../../../composer/particle/validator/vendor/autoload.php",
+            __DIR__ . "/../../../resources/composer/particle/validator/vendor/autoload.php",
             Validator::class
         );
     }
