@@ -23,9 +23,32 @@ declare(strict_types=1);
 
 namespace pjz9n\simplechestshop;
 
+use Illuminate\Database\Capsule\Manager;
+use Particle\Validator\Validator;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase
 {
-    //
+    public function onLoad(): void
+    {
+        $this->loadLibrary(
+            __DIR__ . "/../../../composer/illuminate/database/vendor/autoload.php",
+            Manager::class
+        );
+        $this->loadLibrary(
+            __DIR__ . "/../../../composer/particle/validator/vendor/autoload.php",
+            Validator::class
+        );
+    }
+
+    private function loadLibrary(string $autoloadPath, string $checkClass): void
+    {
+        $this->getLogger()->debug("Check class load: " . $checkClass);
+        if (!class_exists($checkClass)) {
+            $this->getLogger()->debug("Include composer autoloader: " . $autoloadPath);
+            require_once $autoloadPath;
+        } else {
+            $this->getLogger()->debug("Already autoloaded.");
+        }
+    }
 }
